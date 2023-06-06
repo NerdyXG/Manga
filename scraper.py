@@ -26,6 +26,10 @@ for manga in manga_list:
 	try:
 		manga_title = manga.find("h3", class_="name").a.text
 		manga_thumbnail = manga.find("a", class_="thumb").img["src"]
-		print(f"Title: {manga_title}\nThumbnail: {manga_thumbnail}\n")
 	except AttributeError:
 		...
+	else:
+		print(f"Title: {manga_title}\nThumbnail: {manga_thumbnail}\n")
+		num_of_manga += 1
+
+print(f"{num_of_manga} issues scraped!!!")
