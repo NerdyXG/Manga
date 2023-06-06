@@ -20,7 +20,12 @@ except requests.exceptions.RequestException as err:
     sys.exit(err)
 
 soup = bs(html_data, "lxml")
-manga_list = soup.find("div", class_="entry")
-manga_title = manga_list.find("h3", class_="name").a.text
-manga_thumbnail = manga_list.find("a", class_="thumb").img["src"]
-print(manga_thumbnail)
+num_of_manga = 0
+manga_list = soup.find_all("div", class_="entry")
+for manga in manga_list:
+	try:
+		manga_title = manga.find("h3", class_="name").a.text
+		manga_thumbnail = manga.find("a", class_="thumb").img["src"]
+		print(f"Title: {manga_title}\nThumbnail: {manga_thumbnail}\n")
+	except AttributeError:
+		...
